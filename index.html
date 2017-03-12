@@ -7,23 +7,28 @@
     <link rel="stylesheet" href="style/main.css">
 </head>
 <body>
-    <div class="container">
-        <div class="game-field">
-            <p class="" id="1"></p>
-            <p class="" id="2">O</p>
-            <p class="" id="3">X</p>
-            <p class="" id="4">O</p>
-            <p class="" id="5">X</p>
-            <p class="" id="6">O</p>
-            <p class="" id="7">X</p>
-            <p class="" id="8">O</p>
-            <p class="" id="9">X</p>
+    <div class="wrapper" id="app">
+        <div class="container">
+            <div class="game-field">
+                <div class="row" v-for="(row, index) in board">
+                    <span class="text-field" v-for="(item, index) in row"  v-bind:id="item.id" v-bind:class="item.led? 'won': ''" v-on:click="myMove(item)">{{item.contents}}</span>
+                </div>
+                <!--<p class="" id="2">O</p>-->
+                <!--<p class="" id="3">X</p>-->
+                <!--<p class="" id="4">O</p>-->
+                <!--<p class="" id="5">X</p>-->
+                <!--<p class="" id="6">O</p>-->
+                <!--<p class="" id="7">X</p>-->
+                <!--<p class="" id="8">O</p>-->
+                <!--<p class="" id="9">X</p>-->
+            </div>
         </div>
+        <footer>
+            <p>{{message}}</p>
+        </footer>
     </div>
-    <footer>
-        <p>You won ! =)</p>
-    </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.0/vue.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
