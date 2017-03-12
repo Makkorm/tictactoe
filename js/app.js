@@ -65,7 +65,6 @@
             // если пустое, то закрашиваем его крестиком и запускаем ход компьютера
             // если кликаем по заполненому полю, то ничего не происходит
             myMove : function(field){
-                console.log(this.myTurn + "мой ход")
                 if (this.empty(field)){
                     if (this.myTurn === true) {
                         field.contents = this.playerFigure;
@@ -87,7 +86,7 @@
                 if (!this.checkGame(field)){
                     setTimeout(function(){
                         vm.botMove();
-                    }, Math.floor(Math.random() * 2000));
+                    }, Math.floor(Math.random() * 1200));
                 }
             },
             // данный метод проверяет поле на заполнение
@@ -100,9 +99,10 @@
             },
             // метод описывающий ход бота
             botMove : function(){
-                var choices = this.planMove(),
+                var choices = this.collectChoices(),
                     field;
-                if (choices[0]) {
+
+                if (choices.length > 0) {
                     field = choices[Math.floor(Math.random() * choices.length)];
                 } else {
                     // выбираем поле(клетку) из всех допустимых
@@ -116,7 +116,7 @@
             // создаем пустой массив choices
             // пробегаем все выигрышные варианты,возвращаемые методом winVectors
             // и запускаем функцию planMove
-            planMove : function(){
+            collectChoices : function(){
                 var choices = [],
                     winVectors = this.winVectors();
                 this.winVectors().forEach(function(vector) {
@@ -172,7 +172,7 @@
                 nonEmpty.push(el);
             }
         });
-        // делаем проверку. Если есть 2 заполненных поля (в данном случае ботом), возвращаем первое пустое
+        // делаем проверку. Если есть 2 заполненных поля , возвращаем первое пустое
         if (nonEmpty.length === 2 && nonEmpty[0].contents == nonEmpty[1].contents) {
             return empty[0];
         }

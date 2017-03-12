@@ -13,14 +13,6 @@
                 <div class="row" v-for="(row, index) in board">
                     <span class="text-field" v-for="(item, index) in row"  v-bind:id="item.id" v-bind:class="item.led? 'won': ''" v-on:click="myMove(item)">{{item.contents}}</span>
                 </div>
-                <!--<p class="" id="2">O</p>-->
-                <!--<p class="" id="3">X</p>-->
-                <!--<p class="" id="4">O</p>-->
-                <!--<p class="" id="5">X</p>-->
-                <!--<p class="" id="6">O</p>-->
-                <!--<p class="" id="7">X</p>-->
-                <!--<p class="" id="8">O</p>-->
-                <!--<p class="" id="9">X</p>-->
             </div>
         </div>
         <footer>
