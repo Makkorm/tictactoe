@@ -27,12 +27,12 @@
             ],
             playerFigure : "x",
             botFigure : "o",
+            message : 'Your turn',
+            myTurn : true,
             // winVectors содержит выигрышные комбинации, их 8:
             // 3 по горизонтали
             // 3 по вертикали
             // и 2 диагонали
-            message : '',
-            myTurn : true,
             winVectors : function() {
                 var board = this.board,
                     vectors = [
@@ -84,6 +84,7 @@
                 // после нашего хода меняем значение на false
                 // и в конце метода botMove обратно меняем на myTurn=true;
                 if (!this.checkGame(field)){
+                    this.message = "Bot is thinking...";
                     setTimeout(function(){
                         vm.botMove();
                     }, Math.floor(Math.random() * 1200));
@@ -102,6 +103,8 @@
                 var choices = this.collectChoices(),
                     field;
 
+                // если collectChoices вернет пустой массив, то бот ходит рандомно, исходя из возможных вариантов хода
+                // если collectChoices возвращает не пустой массив, то ход выбирается из его значений
                 if (choices.length > 0) {
                     field = choices[Math.floor(Math.random() * choices.length)];
                 } else {
@@ -110,6 +113,7 @@
                 }
                 field.contents = this.botFigure;
                 this.myTurn = true;
+                this.message = "Your turn";
                 this.checkGame(field);
             },
             // данный метод возвращает допустимые ходы
@@ -142,7 +146,7 @@
                     if (item.contents == this.playerFigure){
                         this.message = "You won ! =)"
                     } else {
-                        this.message = "You lost =("
+                        this.message = "Bot won =("
                     }
                     won.forEach(function(elem){
                         elem.led = true;
@@ -172,7 +176,6 @@
                 nonEmpty.push(el);
             }
         });
-        // делаем проверку. Если есть 2 заполненных поля , возвращаем первое пустое
         if (nonEmpty.length === 2 && nonEmpty[0].contents == nonEmpty[1].contents) {
             return empty[0];
         }
@@ -180,7 +183,7 @@
 
     function checkMe(arr){
         var one = arr[0].contents;
-        return one != "" && one == arr[1].contents && one == arr[2].contents;
+        return one != "" && one == arr[1].contents && one == arr[2].contents && one;
     }
 
 

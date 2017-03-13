@@ -7,18 +7,18 @@
     <link rel="stylesheet" href="style/main.css">
 </head>
 <body>
-    <div class="wrapper" id="app">
-        <div class="container">
-            <div class="game-field">
-                <div class="row" v-for="(row, index) in board">
-                    <span class="text-field" v-for="(item, index) in row"  v-bind:id="item.id" v-bind:class="item.led? 'won': ''" v-on:click="myMove(item)">{{item.contents}}</span>
-                </div>
+<div class="wrapper" id="app">
+    <div class="container">
+        <div class="game-field">
+            <div class="row" v-for="(row, index) in board">
+                <span class="text-field" v-for="(item, index) in row"  v-bind:id="item.id" v-bind:class="item.led? 'won': ''" v-on:click="myMove(item)">{{item.contents}}</span>
             </div>
         </div>
-        <footer>
-            <p>{{message}}</p>
-        </footer>
     </div>
+    <footer>
+        <p>{{message}}</p>
+    </footer>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.0/vue.js"></script>
 <script src="js/app.js"></script>
